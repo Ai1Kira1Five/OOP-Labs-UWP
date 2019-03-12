@@ -26,7 +26,7 @@
 			</Grid.ColumnDefinitions>
 			
 			<Button Name="gamburgerBtn" Grid.Column="0" Style="{StaticResource buttonStyle}" Content="&#xE700;" FontFamily="Segoe MDL2 Assets" Click="gamburgerBtn_Click"/>
-			<StackPanel Grid.Column="1" Background="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="Gray" BorderThickness="0 0 1 0">
+			<StackPanel Grid.Column="1" Background="Black" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderBrush="Gray" BorderThickness="0 0 1 1">
 				<TextBlock Name="textHeader" Foreground="White" HorizontalAlignment="Center" Margin="0 15 0 0"/>
 			</StackPanel>
 			
@@ -51,7 +51,7 @@
 				</StackPanel>
 			</Button>
 			
-			<Button Name="exitBtn" Grid.Column="5" Style="{StaticResource buttonStyle}" BorderThickness="0" Click="exitBtn_Click">
+			<Button Name="exitBtn" Grid.Column="5" Style="{StaticResource buttonStyle}" BorderThickness="0 0 0 1" Click="exitBtn_Click">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="&#xE10A;" Style="{StaticResource textBlockIcon}"/>
 					<TextBlock Text="Выход"/>
