@@ -23,15 +23,65 @@
 		<Grid Grid.Column="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
+				<RowDefinition Height="400" />
 			</Grid.RowDefinitions>
 
-			<Grid Grid.Row="0">
-				
+			<Grid Grid.Row="0" HorizontalAlignment="Stretch" Margin="600,0,0,0" VerticalAlignment="Stretch">
+				<!--tb width & height: 120 30; FontSize:25-->
+				<TextBlock Text="Имя:" Style="{StaticResource onPageTextBlock}"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Margin="10 50 10 0"/>
+				<TextBlock Text="Год:" Style="{StaticResource onPageTextBlock}"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Margin="10 100 10 0"/>
+				<TextBlock Text="ВУЗ:" Style="{StaticResource onPageTextBlock}"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Margin="10 150 10 0"/>
+				<TextBlock Text="Причина:" Style="{StaticResource onPageTextBlock}"
+						   HorizontalAlignment="Left" VerticalAlignment="Top"
+						   Margin="10 200 10 0"/>
+
+				<!--TextBox-->
+				<TextBox x:Name="tb_Name" Style="{StaticResource onPageTextBox}"
+						 HorizontalAlignment="Left" VerticalAlignment="Top" 
+						 Margin="130 50 10 0"/>
+				<TextBox x:Name="tb_Year" Style="{StaticResource onPageTextBox}"
+						 HorizontalAlignment="Left" VerticalAlignment="Top" 
+						 Margin="130 100 10 0"/>
+				<TextBox x:Name="tb_VYZ" Style="{StaticResource onPageTextBox}"
+						 HorizontalAlignment="Left" VerticalAlignment="Top" 
+						 Margin="130 150 10 0"/>
+				<TextBox x:Name="tb_Reason" Style="{StaticResource onPageTextBox}"
+						 HorizontalAlignment="Left" VerticalAlignment="Top" 
+						 Margin="130 200 10 0"/>
+
+				<!--rb width & height: 90 35-->
+				<RadioButton x:Name="rb_Man" Content="Человек" Tag="Man" 
+							 Style="{StaticResource radioButton}"
+							 Margin="0 50 110 0"
+							 IsChecked="True"
+							 Checked="rb_Checked"/>
+				<RadioButton x:Name="rb_School" Content="Школьник" Tag="School"
+							 Style="{StaticResource radioButton}"
+							 Margin="0 80 110 0"/>
+				<RadioButton x:Name="rb_Student" Content="Студент" Tag="Student"
+							 Style="{StaticResource radioButton}"
+							 Margin="0 110 110 0"/>
+				<RadioButton x:Name="rb_Zaoch" Content="Заочник" Tag="Zaoch"
+							 Style="{StaticResource radioButton}"
+							 Margin="0 140 110 0"/>
 			</Grid>
 
-			<Grid Grid.Row="1">
-				
+			<Grid Grid.Row="1"  HorizontalAlignment="Stretch" Margin="600,0,0,0" VerticalAlignment="Stretch">
+				<Button x:Name="outputButton" Content="Вывод" VerticalAlignment="Bottom" Margin="10 10 10 50" Style="{StaticResource controlButtons}" Click="outputButton_Click"/>
+				<Button x:Name="inputButton" Content="Ввод" VerticalAlignment="Bottom" Margin="10 10 0 115" Style="{StaticResource controlButtons}" Click="inputButton_Click"/>
+				<Button x:Name="createSpaceButton" Content="Выделить место" VerticalAlignment="Bottom" Margin="330 10 10 50" Style="{StaticResource controlButtons}" Click="createSpaceButton_Click"/>
+				<Slider x:Name="spaceSlider" 
+						Style="{StaticResource sliderBar}"
+						ValueChanged="spaceSlider_ValueChanged"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Bottom"
+						Margin="330 10 10 115"/>
 			</Grid>
 			
 		</Grid>

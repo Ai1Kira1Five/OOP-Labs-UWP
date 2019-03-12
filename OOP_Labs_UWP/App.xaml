@@ -37,5 +37,39 @@
 			<Setter Property="IsReadOnly" Value="True" />
 			<Setter Property="AllowFocusOnInteraction" Value="False"/>
 		</Style>
+
+		<Style TargetType="Button" x:Key="controlButtons">
+			<Setter Property="Height" Value="45" />
+			<Setter Property="Width" Value="300" />
+			<Setter Property="FontSize" Value="29" />
+			<Setter Property="VerticalContentAlignment" Value="Center" />
+		</Style>
+
+		<Style TargetType="Slider" x:Key="sliderBar">
+			<Setter Property="Minimum" Value="1" />
+			<Setter Property="Maximum" Value="100"/>
+			<Setter Property="TickFrequency" Value="1"/>
+			<Setter Property="Width" Value="300"/>
+		</Style>
+
+		<Style TargetType="RadioButton" x:Key="radioButton">
+			<Setter Property="FontSize" Value="18" />
+			<Setter Property="Height" Value="35"/>
+			<Setter Property="Width" Value="90"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+		</Style>
+
+		<Style TargetType="TextBlock" x:Key="onPageTextBlock">
+			<Setter Property="FontSize" Value="25"/>
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="Height" Value="30"/>
+		</Style>
+
+		<Style TargetType="TextBox" x:Key="onPageTextBox">
+			<Setter Property="Width" Value="120" />
+			<Setter Property="Height" Value="30"/>
+			<Setter Property="FontSize" Value="15" />
+		</Style>
 	</Application.Resources>
 </Application>
