@@ -9,6 +9,31 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-		<Image Source="Assets/kod.jpg" Stretch="UniformToFill"/>
+		<Image Source="Assets/kod.jpg" Stretch="Fill"/>
+
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="600" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+		</Grid>
+		
+		<TextBox x:Name="textBox" Grid.Column="0" Style="{StaticResource outputTextBox}" />
+
+		<Grid Grid.Column="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0">
+				
+			</Grid>
+
+			<Grid Grid.Row="1">
+				
+			</Grid>
+			
+		</Grid>
 	</Grid>
 </Page>

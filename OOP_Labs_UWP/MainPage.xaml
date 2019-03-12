@@ -62,7 +62,7 @@
 		<!--Содержание-->
 		<Grid Grid.Row="1">
 			
-			<SplitView Name="mySplit" DisplayMode="CompactOverlay" CompactPaneLength="50" OpenPaneLength="200">
+			<SplitView Name="mySplit" DisplayMode="CompactInline" CompactPaneLength="50" OpenPaneLength="200">
 				<!--Buttons on closed pane-->
 				<SplitView.Pane>
 					<ListBox Name="listBoxButtons" SelectionMode="Single" SelectionChanged="listBoxButtons_SelectionChanged">

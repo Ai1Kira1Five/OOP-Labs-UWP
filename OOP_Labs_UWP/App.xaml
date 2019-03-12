@@ -27,5 +27,15 @@
 			<Setter Property="Text" Value="&#xE004;"/>
 			<Setter Property="Margin" Value="5 0 20 0"/>
 		</Style>
+
+		<Style TargetType="TextBox" x:Key="outputTextBox">
+			<Setter Property="VerticalAlignment" Value="Stretch" />
+			<Setter Property="HorizontalAlignment" Value="Left" />
+			<Setter Property="Margin" Value="50 50 0 50" />
+			<Setter Property="Width" Value="500" />
+			<Setter Property="FontSize" Value="13" />
+			<Setter Property="IsReadOnly" Value="True" />
+			<Setter Property="AllowFocusOnInteraction" Value="False"/>
+		</Style>
 	</Application.Resources>
 </Application>
