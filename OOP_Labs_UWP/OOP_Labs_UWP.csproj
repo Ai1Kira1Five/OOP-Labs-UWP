@@ -121,10 +121,15 @@
   <ItemGroup>
     <Content Include="Assets\colorBoom.jpg" />
     <Content Include="Assets\gorod.jpg" />
+    <Content Include="Assets\idiot.gif" />
     <Content Include="Assets\kod.jpg" />
     <Content Include="Assets\kraska.jpg" />
+    <Content Include="Assets\man.png" />
     <Content Include="Assets\neon.jpg" />
     <Content Include="Assets\ocean.jpg" />
+    <Content Include="Assets\school.jpg" />
+    <Content Include="Assets\test.png" />
+    <Content Include="Assets\zaoch.gif" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
