@@ -11,21 +11,28 @@
     <Grid>
 		<Image Source="Assets/colorBoom.jpg" Stretch="UniformToFill"/>
 		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="35"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
 
-			<Button x:Name="Man" Grid.Column="0" Content="Человек" Style="{StaticResource buttonStyle}" 
-					VerticalAlignment="Top" Height="35"/>
-			<Button x:Name="School" Grid.Column="1" Content="Школьник" Style="{StaticResource buttonStyle}" 
-					VerticalAlignment="Top" Height="35"/>
-			<Button x:Name="Student" Grid.Column="2" Content="Студент" Style="{StaticResource buttonStyle}" 
-					VerticalAlignment="Top" Height="35"/>
-			<Button x:Name="Zaoch" Grid.Column="3" Content="Заочник" Style="{StaticResource buttonStyle}" 
-					VerticalAlignment="Top" Height="35" BorderThickness="0 0 0 1"/>
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+
+				<Button x:Name="Man" Grid.Column="0" Content="Человек" Style="{StaticResource buttonStyle}" Click="Choose_Click"/>
+				<Button x:Name="School" Grid.Column="1" Content="Школьник" Style="{StaticResource buttonStyle}" Click="Choose_Click"/>
+				<Button x:Name="Student" Grid.Column="2" Content="Студент" Style="{StaticResource buttonStyle}" Click="Choose_Click"/>
+				<Button x:Name="Zaoch" Grid.Column="3" Content="Заочник" Style="{StaticResource buttonStyle}" Click="Choose_Click" BorderThickness="0 0 0 1"/>
+			</Grid>
+
+			<Grid Grid.Row="1">
+				<Canvas Name="onPageCanvas" PointerPressed="onPageCanvas_PointerPressed" Background="Transparent" />
+			</Grid>
 		</Grid>
 		
 	</Grid>
