@@ -60,7 +60,7 @@
 							 Style="{StaticResource radioButton}"
 							 Margin="0 50 110 0"
 							 IsChecked="True"
-							 Checked="rb_Checked"/>
+							 Checked="Rb_Checked"/>
 				<RadioButton x:Name="rb_School" Content="Школьник" Tag="School"
 							 Style="{StaticResource radioButton}"
 							 Margin="0 80 110 0"/>
@@ -73,12 +73,12 @@
 			</Grid>
 
 			<Grid Grid.Row="1"  HorizontalAlignment="Stretch" Margin="600,0,0,0" VerticalAlignment="Stretch">
-				<Button x:Name="outputButton" Content="Вывод" VerticalAlignment="Bottom" Margin="10 10 10 50" Style="{StaticResource controlButtons}" Click="outputButton_Click"/>
-				<Button x:Name="inputButton" Content="Ввод" VerticalAlignment="Bottom" Margin="10 10 0 115" Style="{StaticResource controlButtons}" Click="inputButton_Click"/>
-				<Button x:Name="createSpaceButton" Content="Выделить место" VerticalAlignment="Bottom" Margin="330 10 10 50" Style="{StaticResource controlButtons}" Click="createSpaceButton_Click"/>
+				<Button x:Name="outputButton" Content="Вывод" VerticalAlignment="Bottom" Margin="10 10 10 50" Style="{StaticResource controlButtons}" Click="OutputButton_Click"/>
+				<Button x:Name="inputButton" Content="Ввод" VerticalAlignment="Bottom" Margin="10 10 0 115" Style="{StaticResource controlButtons}" Click="InputButton_Click"/>
+				<Button x:Name="createSpaceButton" Content="Выделить место" VerticalAlignment="Bottom" Margin="330 10 10 50" Style="{StaticResource controlButtons}" Click="CreateSpaceButton_Click"/>
 				<Slider x:Name="spaceSlider" 
 						Style="{StaticResource sliderBar}"
-						ValueChanged="spaceSlider_ValueChanged"
+						ValueChanged="SpaceSlider_ValueChanged"
 						HorizontalAlignment="Left"
 						VerticalAlignment="Bottom"
 						Margin="330 10 10 115"/>

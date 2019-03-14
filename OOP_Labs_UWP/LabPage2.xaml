@@ -31,7 +31,7 @@
 			</Grid>
 
 			<Grid Grid.Row="1">
-				<Canvas Name="onPageCanvas" PointerPressed="onPageCanvas_PointerPressed" Background="Transparent" />
+				<Canvas Name="onPageCanvas" PointerPressed="OnPageCanvas_PointerPressed" Background="Transparent" />
 			</Grid>
 		</Grid>
 		
