@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Runtime.Serialization.Formatters.Binary;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -21,5 +22,21 @@ namespace OOP_Labs_UWP
         {
             this.InitializeComponent();
         }
+
+        [Serializable]
+        public class Man
+        {
+            public string Name { get; set; }
+            public int Year { get; set; }
+
+            public Man(string name, int year)
+            {
+                Name = name;
+                Year = year;
+            }
+        }
+
+        Man[] man;
+        BinaryFormatter binF = new BinaryFormatter();
     }
 }
