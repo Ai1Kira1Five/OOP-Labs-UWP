@@ -119,6 +119,7 @@
     <None Include="OOP_Labs_UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\arrow.png" />
     <Content Include="Assets\chain.png" />
     <Content Include="Assets\colorBoom.jpg" />
     <Content Include="Assets\gorod.jpg" />

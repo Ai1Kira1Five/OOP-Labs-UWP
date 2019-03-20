@@ -61,6 +61,7 @@ namespace OOP_Labs_UWP
         private void homeBtn_Click(object sender, RoutedEventArgs e)
         {
             myFrame.Navigate(typeof(LabPage1));
+            textHeader.Text = "Lab 1";
         }
 
         private void exitBtn_Click(object sender, RoutedEventArgs e)
