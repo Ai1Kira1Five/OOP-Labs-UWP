@@ -21,21 +21,35 @@
 				<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Violet" Margin="5 5 2 5" CornerRadius="4">
 					<Grid>
 						<!-- Block of main controls-->
-						<ProgressBar BorderBrush="Cyan" BorderThickness="1" VerticalAlignment="Top" Height="25" Margin="10 15 10 0"/>
+						<ProgressBar x:Name="lb3ProgressBar" BorderBrush="Cyan" BorderThickness="1" VerticalAlignment="Top" Height="25" Margin="10 15 10 0"/>
 						<TextBlock x:Name="progressBarCurr" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 41 0 0" Text="NaN"/>
 						<TextBlock x:Name="progressBarAll" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 41 10 0" Text="NaN"/>
-						<Slider Style="{StaticResource sliderBar}" Margin="10 57 10 0"/>
-						<Button x:Name="createSpaceBtn" Content="Выделить место" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10 95 10 0"/>
+						<Slider x:Name="lb3slider" Style="{StaticResource sliderBar}" Margin="10 57 10 0" Width="268" ValueChanged="Slider_ValueChanged"/>
+						<Button x:Name="createSpaceBtn" Content="Выделить место" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10 95 10 0" Click="CreateSpaceBtn_Click"/>
 						
 						<!-- Block of inputs-->
-						
+						<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 135 10 0" Style="{StaticResource onPageTextBlock}" Text="Имя: "/>
+						<TextBox x:Name="tb_Name" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10 165 10 0"/>
+						<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10 190 10 0" Style="{StaticResource onPageTextBlock}" Text="Год: "/>
+						<TextBox x:Name="tb_Year" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10 220 10 0"/>
+						<Button x:Name="inputBtn" Content="Ввод" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10 270 10 0" Click="InputBtn_Click"/>
+
+						<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5 320 5 5" BorderBrush="Violet" BorderThickness="2" CornerRadius="4">
+							<Grid>
+								<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 5 10 0" Text="Сериализация"/>
+								<RadioButton x:Name="SortRb" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 30 0 0" Content="Запись с сортировкой" IsChecked="True"/>
+								<RadioButton x:Name="NonSortRb" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 60 0 0" Content="Запись без сортировкой"/>
+
+								<Button x:Name="SerializeBtn" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10 0 10 10" Click="SerializeBtn_Click"/>
+							</Grid>
+						</Border>
 					</Grid>
 				</Border>
 			</Grid>
 
 			<Grid Grid.Column="1">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="50" />
+					<RowDefinition Height="100" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 
@@ -59,7 +73,7 @@
 			<!--De-serialized data-->
 			<Grid Grid.Column="2">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="50" />
+					<RowDefinition Height="100" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
 
