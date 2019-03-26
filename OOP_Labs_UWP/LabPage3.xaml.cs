@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
+using Ude;
+using UniversalSerializerLib3;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -16,7 +21,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace OOP_Labs_UWP
 {
-    [Serializable]
     public class Man : IComparable
     {
         public string Name { get; set; }
@@ -45,10 +49,8 @@ namespace OOP_Labs_UWP
             inputBtn.IsEnabled = false;
         }
 
-        BinaryFormatter binF = new BinaryFormatter();
         private static int size = 0, currSize = 0;
         List<Man> manList = new List<Man>(size);
-        
 
         private void CreateSpaceBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -64,18 +66,58 @@ namespace OOP_Labs_UWP
             progressBarAll.Text = Convert.ToString(size);
         }
 
-        private void SerializeBtn_Click(object sender, RoutedEventArgs e)
+        private async void SerializeBtn_ClickAsync(object sender, RoutedEventArgs e)
         {
-            if (SortRb.IsChecked == true)
+            Stopwatch sw = Stopwatch.StartNew();
+            StorageFolder fl = await ApplicationData.Current.LocalFolder.CreateFolderAsync("LabFiles", CreationCollisionOption.OpenIfExists);
+
+            StorageFile serFile = await fl.CreateFileAsync("man_list.txt", CreationCollisionOption.ReplaceExisting);
+            
+
+            var stream = await serFile.OpenAsync(FileAccessMode.ReadWrite);
+            
+
+            using (var s = new UniversalSerializer(stream.AsStream(), SerializerFormatters.BinarySerializationFormatter))
             {
-                manList.Sort();
-                serTextBlock.Text = "sort done";
-                Serializer();
+                s.Serialize(manList);
             }
-            else if (NonSortRb.IsChecked == true)
-                Serializer();
+            stream.Dispose();
+            sw.Stop();
+            string txt = " ";
 
 
+            //IBuffer buf = await FileIO.ReadBufferAsync(serFile);
+            //DataReader reader = DataReader.FromBuffer(buf);
+            //byte[] fileContent = new byte[reader.UnconsumedBufferLength];
+            //ICharsetDetector cdet = new CharsetDetector();
+            //cdet.Feed(fileContent, 0, fileContent.Length);
+            //cdet.DataEnd();
+            //if (cdet.Charset != null)
+            //    txt = Portable.Text.Encoding.GetEncoding(cdet.Charset).GetString(fileContent, 0, fileContent.Length);
+
+            txt = await Windows.Storage.FileIO.ReadTextAsync(serFile, Windows.Storage.Streams.UnicodeEncoding.Utf16BE);
+            
+            serTextBlock.Text = txt;
+            serializedTime.Text = Convert.ToString(Math.Truncate(sw.Elapsed.TotalMilliseconds)); 
+        }
+
+        private async void DeserializeBtn_ClickAsync(object sender, RoutedEventArgs e)
+        {
+            StorageFolder fl = await ApplicationData.Current.LocalFolder.CreateFolderAsync("LabFiles", CreationCollisionOption.OpenIfExists);
+
+            StorageFile serFile = await fl.CreateFileAsync("man_list.bin", CreationCollisionOption.OpenIfExists);
+
+            Stream str = await serFile.OpenStreamForReadAsync();
+
+            using (var des = new UniversalSerializer(str))
+            {
+                var deser = des.Deserialize<Man>();
+                desTextBlock.Text = Convert.ToString(deser);
+            }
+
+            //string txt = serFile.Path;
+
+            //serTextBlock.Text = txt;
         }
 
         private void InputBtn_Click(object sender, RoutedEventArgs e)
@@ -91,15 +133,6 @@ namespace OOP_Labs_UWP
             manList.Add(newMan);
 
             if (currSize == size) inputBtn.IsEnabled = false;
-        }
-
-        public void Serializer()
-        {
-            using (Stream fs = File.Open("ms-appx:///files/man_list.bin", FileMode.OpenOrCreate, FileAccess.ReadWrite))
-            {
-                binF.Serialize(fs, manList);
-                serTextBlock.Text = "done";
-            }
         }
     }
 }

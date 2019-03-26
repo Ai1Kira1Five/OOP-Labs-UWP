@@ -40,7 +40,8 @@
 								<RadioButton x:Name="SortRb" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 30 0 0" Content="Запись с сортировкой" IsChecked="True"/>
 								<RadioButton x:Name="NonSortRb" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 60 0 0" Content="Запись без сортировкой"/>
 
-								<Button x:Name="SerializeBtn" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10 0 10 10" Click="SerializeBtn_Click"/>
+								<Button x:Name="SerializeBtn" Content="Сериализация" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10 0 10 55" Click="SerializeBtn_ClickAsync"/>
+								<Button x:Name="DeserializeBtn" Content="Десериализация" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10 0 10 10" Click="DeserializeBtn_ClickAsync"/>
 							</Grid>
 						</Border>
 					</Grid>
@@ -57,15 +58,17 @@
 				<Grid Grid.Row="0">
 					<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Violet" Margin="5 5 2 5" CornerRadius="4">
 						<Grid>
-							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"/>
-							<TextBlock x:Name="serializedTime" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="Serialization time:" Margin="0 10 0 0"/>
+							<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE916;" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 60 0"/>
+							<TextBlock x:Name="serializedTime" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 0 0"/>
+							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60 35 0 0" Text=" ms"/>
 						</Grid>
 					</Border>
 				</Grid>
 
 				<Grid Grid.Row="1">
 					<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Violet" Margin="5 2 2 5" CornerRadius="4">
-						<TextBox x:Name="serTextBlock" Margin="10" IsReadOnly="True" AllowFocusOnInteraction="False" BorderThickness="1"/>
+						<TextBox x:Name="serTextBlock" Margin="10" IsReadOnly="True" AllowFocusOnInteraction="False" BorderThickness="1" TextWrapping="Wrap"/>
 					</Border>
 				</Grid>
 			</Grid>
@@ -80,8 +83,10 @@
 				<Grid Grid.Row="0">
 					<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Violet" Margin="5 5 2 5" CornerRadius="4">
 						<Grid>
-							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"/>
-							<TextBlock x:Name="deSerializedTime" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="De-serialization time:" Margin="0 10 0 0"/>
+							<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE916;" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 60 0"/>
+							<TextBlock x:Name="deSerializedTime" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 0 0"/>
+							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60 35 0 0" Text=" ms"/>
 						</Grid>
 					</Border>
 				</Grid>
