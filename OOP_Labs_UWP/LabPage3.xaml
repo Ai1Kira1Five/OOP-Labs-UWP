@@ -37,9 +37,11 @@
 						<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5 320 5 5" BorderBrush="Violet" BorderThickness="2" CornerRadius="4">
 							<Grid>
 								<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10 5 10 0" Text="Сериализация"/>
+                                <!--
 								<RadioButton x:Name="SortRb" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 30 0 0" Content="Запись с сортировкой" IsChecked="True"/>
 								<RadioButton x:Name="NonSortRb" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10 60 0 0" Content="Запись без сортировкой"/>
-
+                                -->
+                                
 								<Button x:Name="SerializeBtn" Content="Сериализация" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10 0 10 55" Click="SerializeBtn_ClickAsync"/>
 								<Button x:Name="DeserializeBtn" Content="Десериализация" Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="10 0 10 10" Click="DeserializeBtn_ClickAsync"/>
 							</Grid>
@@ -50,8 +52,8 @@
 
 			<Grid Grid.Column="1">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="100" />
-					<RowDefinition Height="*" />
+					<RowDefinition Height="0.15*" />
+					<RowDefinition Height="0.85*" />
 				</Grid.RowDefinitions>
 
 				<!--Serialized data-->
@@ -62,7 +64,8 @@
 							<FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE916;" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 60 0"/>
 							<TextBlock x:Name="serializedTime" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 35 0 0"/>
 							<TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="60 35 0 0" Text=" ms"/>
-						</Grid>
+                            <TextBlock x:Name="serFilePath" HorizontalAlignment="Center" VerticalAlignment="Top" Text="/File path" Margin="0 65 0 0"/>
+                        </Grid>
 					</Border>
 				</Grid>
 
@@ -76,8 +79,8 @@
 			<!--De-serialized data-->
 			<Grid Grid.Column="2">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="100" />
-					<RowDefinition Height="*" />
+					<RowDefinition Height="0.15*" />
+					<RowDefinition Height="0.85*" />
 				</Grid.RowDefinitions>
 
 				<Grid Grid.Row="0">
@@ -93,7 +96,7 @@
 
 				<Grid Grid.Row="1">
 					<Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="2" BorderBrush="Violet" Margin="5 2 2 5" CornerRadius="4">
-						<TextBox x:Name="desTextBlock" Margin="10" IsReadOnly="True" AllowFocusOnInteraction="False" BorderThickness="1"/>
+						<TextBox x:Name="desTextBlock" Margin="10" IsReadOnly="True" AcceptsReturn="True" AllowFocusOnInteraction="False" BorderThickness="1"/>
 					</Border>
 				</Grid>
 			</Grid>

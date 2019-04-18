@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UniversalSerializerLib3;
+using System.Runtime.Serialization;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,27 +10,18 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace OOP_Labs_UWP
 {
-    public class Man : IComparable
+    #region Struct to serialize
+    [DataContract]
+    public class Man
     {
-        [ForceSerialize]
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
         public string Name { get; set; }
-        [ForceSerialize]
+        [DataMember]
         public int Year { get; set; }
-
-        public Man(string name, int year)
-        {
-            this.Name = name;
-            this.Year = year;
-        }
-
-        public int CompareTo(object obj)
-        {
-            if (obj is Man man)
-                return this.Name.CompareTo(man.Name);
-            else
-                throw new Exception("Cannot compare this objects...");
-        }
     }
+    #endregion
 
     public sealed partial class LabPage3 : Page
     {
@@ -42,14 +31,26 @@ namespace OOP_Labs_UWP
             inputBtn.IsEnabled = false;
         }
 
+        #region Variables and other
+        //Used by XML helper methods
+        private const string XMLFILENAME = "data.xml";
+
+        //used by JSON helper methods
+        private const string JSONFILENAME = "data.json";
         private static int size = 0, currSize = 0;
-        private ulong streamSize;
-        List<Man> manList = new List<Man>(size);
-        
+        private List<Man> ManList = new List<Man>();
+        #endregion
+
+        #region List of structure
+        private List<Man> buildObject()
+        {
+            ManList.Add(new Man() { Id = currSize, Name = tb_Name.Text, Year = Convert.ToInt32(tb_Year.Text)});
+            return ManList;
+        }
+        #endregion
 
         private void CreateSpaceBtn_Click(object sender, RoutedEventArgs e)
         {
-            manList.AddRange(Enumerable.Repeat(default(Man), size));
             inputBtn.IsEnabled = true;
             lb3ProgressBar.Maximum = size;
             lb3slider.IsEnabled = false;
@@ -59,73 +60,66 @@ namespace OOP_Labs_UWP
         {
             size = Convert.ToInt32(e.NewValue);
             progressBarAll.Text = Convert.ToString(size);
-            
         }
 
         private async void SerializeBtn_ClickAsync(object sender, RoutedEventArgs e)
         {
-            if (SortRb.IsChecked == true) manList.Sort();
-
             Stopwatch sw = new Stopwatch();
+            serFilePath.Text = ApplicationData.Current.LocalFolder.Path;
             sw.Reset();
             sw.Start();
-            
 
-            StorageFolder fl = await ApplicationData.Current.LocalFolder.CreateFolderAsync("LabFiles", CreationCollisionOption.OpenIfExists);
-            StorageFile serFile = await fl.GetFileAsync("man_list.txt");
-            
-            var stream = await serFile.OpenAsync(FileAccessMode.ReadWrite);
-            streamSize = stream.Size;
-
-            using (var s = new UniversalSerializer(stream.AsStream(), SerializerFormatters.BinarySerializationFormatter))
+            var serializer = new DataContractSerializer(typeof(List<Man>));
+            using (var stream = await ApplicationData.Current.LocalFolder.OpenStreamForWriteAsync(
+                XMLFILENAME,
+                CreationCollisionOption.ReplaceExisting))
             {
-                s.Serialize(manList);
+                serializer.WriteObject(stream, ManList);
             }
-
             sw.Stop();
-            string txt = " ";
 
-            using (var inputStream = await serFile.OpenReadAsync())
-            using (var classicStream = inputStream.AsStreamForRead())
-            using (var streamReader = new StreamReader(classicStream))
+            serializedTime.Text = Convert.ToString(sw.ElapsedMilliseconds);
+
+            string content = String.Empty;
+
+            var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(XMLFILENAME);
+            using (StreamReader reader = new StreamReader(myStream))
             {
-                while (!streamReader.EndOfStream)
-                {
-                    txt = streamReader.ReadLine();
-                }
+                content = await reader.ReadToEndAsync();
             }
 
-            stream.Dispose();
-            serTextBlock.Text = txt;
-            serializedTime.Text = Convert.ToString(Math.Truncate(sw.Elapsed.TotalMilliseconds)); 
+            serTextBlock.Text = content;
         }
 
         private async void DeserializeBtn_ClickAsync(object sender, RoutedEventArgs e)
         {
-            StorageFolder fl = await ApplicationData.Current.LocalFolder.CreateFolderAsync("LabFiles", CreationCollisionOption.OpenIfExists);
-            StorageFile serFile = await fl.GetFileAsync("man_list.txt");
+            string content = String.Empty;
+            List<Man> desList;
+            Stopwatch sw = new Stopwatch();
 
-            var stream = await serFile.OpenAsync(FileAccessMode.ReadWrite);
-            stream.Seek(streamSize);
-            using (var des = new UniversalSerializer(stream.AsStream(), SerializerFormatters.BinarySerializationFormatter))
+            sw.Reset();
+            sw.Start();
+            var serializer = new DataContractSerializer(typeof(List<Man>));
+            var myStream = await ApplicationData.Current.LocalFolder.OpenStreamForReadAsync(XMLFILENAME);
+
+            desList = (List<Man>)serializer.ReadObject(myStream);
+
+            foreach(var man in desList)
             {
-                var deser = des.Deserialize<Man>();
-                desTextBlock.Text = Convert.ToString(deser);
+                content += String.Format("ID: {0}, Name: {1}, Year: {2} \r\n", man.Id, man.Name, man.Year);
             }
+            desTextBlock.Text = content;
+            sw.Stop();
+
+            deSerializedTime.Text = Convert.ToString(sw.ElapsedMilliseconds);
         }
 
         private void InputBtn_Click(object sender, RoutedEventArgs e)
         {
-            string name = tb_Name.Text;
-            int year = Convert.ToInt32(tb_Year.Text);
-
-            Man newMan = new Man(name, year);
-
-            progressBarCurr.Text = Convert.ToString(++currSize);
-            lb3ProgressBar.Value = currSize;
-
-            manList.Add(newMan);
-
+            var Person = buildObject();
+            currSize++;
+            progressBarCurr.Text = Convert.ToString(currSize);
+            lb3ProgressBar.Value++;
             if (currSize == size) inputBtn.IsEnabled = false;
         }
     }
